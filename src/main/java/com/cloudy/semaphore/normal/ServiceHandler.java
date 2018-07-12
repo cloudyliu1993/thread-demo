@@ -12,6 +12,7 @@ public class ServiceHandler implements Runnable {
     }
 
     public void run() {
+        System.out.println(Thread.currentThread().getName() + "线程启动了...");
         service.doService();
     }
 }

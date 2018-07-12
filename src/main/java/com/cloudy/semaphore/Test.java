@@ -56,4 +56,34 @@ public class Test {
         while (true);
     }
 
+    /**
+     * 公平信号量
+     */
+    @org.junit.Test
+    public void test04() {
+        IService service = new ServiceFair(1, 1, 1);
+
+        for (int i = 0; i < 20; i++) {
+            Thread testA = new Thread(new ServiceHandler(service));
+            testA.start();
+        }
+
+        while (true);
+    }
+
+    /**
+     * 非公平信号量
+     */
+    @org.junit.Test
+    public void test05() {
+        IService service = new ServiceNonFair(1, 1, 1);
+
+        for (int i = 0; i < 20; i++) {
+            Thread testA = new Thread(new ServiceHandler(service));
+            testA.start();
+        }
+
+        while (true);
+    }
+
 }
