@@ -1,4 +1,4 @@
-package com.cloudy.semaphore.service;
+package com.cloudy.semaphore.normal;
 
 import java.util.concurrent.Semaphore;
 

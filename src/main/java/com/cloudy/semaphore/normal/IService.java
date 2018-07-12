@@ -1,4 +1,4 @@
-package com.cloudy.semaphore.service;
+package com.cloudy.semaphore.normal;
 
 /**
  * Created by Administrator on 2018/7/12.

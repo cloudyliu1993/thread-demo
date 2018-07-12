@@ -1,24 +1,23 @@
 package com.cloudy.semaphore;
 
-import com.cloudy.semaphore.service.Service;
-import com.cloudy.semaphore.service.ServiceUninterruptibly;
-import com.cloudy.semaphore.service.TestA;
-import org.junit.Test;
+import com.cloudy.semaphore.normal.Service;
+import com.cloudy.semaphore.normal.ServiceUninterruptibly;
+import com.cloudy.semaphore.normal.ServiceHandler;
 
 /**
  * Created by Administrator on 2018/7/12.
  */
-public class Test01 {
+public class Test {
 
     /**
      * 能够被中断
      */
-    @Test
+    @org.junit.Test
     public void test01() {
         Service service = new Service(5, 1, 3);
 
         for (int i = 0; i < 20; i++) {
-            Thread testA = new Thread(new TestA(service));
+            Thread testA = new Thread(new ServiceHandler(service));
             testA.start();
             if (i == 10) {
                 testA.interrupt();
@@ -30,12 +29,12 @@ public class Test01 {
     /**
      * 不能被中断
      */
-    @Test
+    @org.junit.Test
     public void test02() {
         ServiceUninterruptibly service = new ServiceUninterruptibly(5, 1, 3);
 
         for (int i = 0; i < 20; i++) {
-            Thread testA = new Thread(new TestA(service));
+            Thread testA = new Thread(new ServiceHandler(service));
             testA.start();
             if (i == 10) {
                 testA.interrupt();

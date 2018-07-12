@@ -1,13 +1,13 @@
-package com.cloudy.semaphore.service;
+package com.cloudy.semaphore.normal;
 
 /**
  * Created by Administrator on 2018/7/12.
  */
-public class TestA implements Runnable{
+public class ServiceHandler implements Runnable {
 
     private IService service;
 
-    public TestA(IService service) {
+    public ServiceHandler(IService service) {
         this.service = service;
     }
 
