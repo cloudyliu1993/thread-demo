@@ -19,14 +19,15 @@ public class ServicePermits implements IService{
     }
 
     /**
-     * 多线程调用doService会根据许可数阻塞到acquire行，如果release数大于acquire数会动态增加semaphore.permits
-     * acquire 能够被中断
+     * 获取semaphore可用许可数、重置许可数、获取队列等待线程数、判断是否有等待现场
      */
     public void doService() {
         try {
-            System.out.println(Thread.currentThread().getName() + "-tryAcquire....");
+            System.out.println(Thread.currentThread().getName() + "-tryAcquire...." + semaphore.getQueueLength());
             semaphore.acquire(acquireNum);
+            Thread.sleep(1000);
 
+            System.out.println(Thread.currentThread().getName() + "-queueLength:" + semaphore.getQueueLength() + "-hasQueuedThreads:" + semaphore.hasQueuedThreads());
             System.out.println(Thread.currentThread().getName() + "-acquire....");
             System.out.println(Thread.currentThread().getName() + "-availablePermits:" + semaphore.availablePermits());
             System.out.println(Thread.currentThread().getName() + "-drainPermits:" + semaphore.drainPermits() + "-availablePermits:" + semaphore.availablePermits());

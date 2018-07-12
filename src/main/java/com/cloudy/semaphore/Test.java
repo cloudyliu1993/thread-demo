@@ -41,6 +41,9 @@ public class Test {
         while (true);
     }
 
+    /**
+     * 获取semaphore可用许可数、重置许可数、获取队列等待线程数、判断是否有等待现场
+     */
     @org.junit.Test
     public void test03() {
         IService service = new ServicePermits(1, 1, 1);
