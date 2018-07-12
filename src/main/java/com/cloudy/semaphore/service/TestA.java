@@ -5,9 +5,9 @@ package com.cloudy.semaphore.service;
  */
 public class TestA implements Runnable{
 
-    private Service service;
+    private IService service;
 
-    public TestA(Service service) {
+    public TestA(IService service) {
         this.service = service;
     }
 
