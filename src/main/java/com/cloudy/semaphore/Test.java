@@ -86,4 +86,19 @@ public class Test {
         while (true);
     }
 
+    /**
+     * tryAcquire使用
+     */
+    @org.junit.Test
+    public void test06() {
+        IService service = new ServiceTryAcquire(1, 2, 1);
+
+        for (int i = 0; i < 20; i++) {
+            Thread testA = new Thread(new ServiceHandler(service));
+            testA.start();
+        }
+
+        while (true);
+    }
+
 }
