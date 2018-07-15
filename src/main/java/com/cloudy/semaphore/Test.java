@@ -101,4 +101,17 @@ public class Test {
         while (true);
     }
 
+    /**
+     * 多进 单处理
+     */
+    @org.junit.Test
+    public void test07() {
+        IService service = new ServiceLock(5, 1, 3);
+
+        for (int i = 0; i < 20; i++) {
+            Thread testA = new Thread(new ServiceHandler(service));
+            testA.start();
+        }
+        while (true);
+    }
 }
