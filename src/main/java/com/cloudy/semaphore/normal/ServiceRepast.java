@@ -40,7 +40,59 @@ public class ServiceRepast {
         return isFull;
     }
 
+    public void set() {
+        try {
+            setSemaphore.acquire();
+            lock.lock();
 
+            while (isFull()) {
+                System.out.println("数据已满............");
+                setCondition.await();
+            }
+
+            for (int i = 0; i < producePosition.length; i++) {
+                if (null == producePosition[i]) {
+                    producePosition[i] = "数据";
+                    System.out.println(Thread.currentThread().getName() + "生产了" + producePosition[i]);
+                    break;
+                }
+            }
+
+            getCondition.signalAll();
+            lock.unlock();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            setSemaphore.release();
+        }
+    }
+
+    public void get() {
+        try {
+            getSemaphore.acquire();
+            lock.lock();
+
+            while (isEmpty()) {
+                System.out.println("数据已空............");
+                getCondition.await();
+            }
+
+            for (int i = 0; i < producePosition.length; i++) {
+                if (null != producePosition[i]) {
+                    producePosition[i] = null;
+                    System.out.println(Thread.currentThread().getName() + "消费了数据");
+                    break;
+                }
+            }
+
+            setCondition.signalAll();
+            lock.unlock();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            getSemaphore.release();
+        }
+    }
 
 
 }

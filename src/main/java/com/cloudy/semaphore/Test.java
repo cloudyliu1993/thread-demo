@@ -114,4 +114,38 @@ public class Test {
         }
         while (true);
     }
+
+    /**
+     * 生产者 消费者
+     */
+    @org.junit.Test
+    public void test08() {
+        final ServiceRepast service = new ServiceRepast();
+
+        for (int i = 0; i < 60; i++) {
+            Thread threadP = new Thread(new Runnable() {
+                public void run() {
+                    service.set();
+                }
+            });
+
+            Thread threadC = new Thread(new Runnable() {
+                public void run() {
+                    service.get();
+                }
+            });
+
+            threadP.start();
+            threadC.start();
+        }
+
+        try {
+            Thread.sleep(10000);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        while (true);
+    }
 }
