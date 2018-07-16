@@ -1,6 +1,7 @@
 package com.cloudy.semaphore.normal;
 
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -11,6 +12,7 @@ public class ServiceLock implements IService{
     private Semaphore semaphore;
 
     private ReentrantLock lock = new ReentrantLock();
+    private Condition condition = lock.newCondition();
 
     private int acquireNum = 1;
     private int releaseNum = 1;
@@ -32,6 +34,7 @@ public class ServiceLock implements IService{
             lock.lock();
 
             System.out.println(Thread.currentThread().getName() + "-acquire....");
+
             Thread.sleep(100);
             System.out.println(Thread.currentThread().getName() + "-sleep finish....");
 
